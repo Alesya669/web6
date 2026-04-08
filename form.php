@@ -142,5 +142,8 @@
     </div>
     <?php endif; ?>
 </div>
+    <div style="text-align: center; margin-top: 20px; padding-top: 15px; border-top: 1px solid #C2C5CE;">
+    <a href="admin.php" style="color: #dc3545; text-decoration: none;"> Администратор</a>
+</div>
 </body>
 </html>
