@@ -182,10 +182,10 @@ $message = '';
 if (isset($_GET['msg'])) {
 switch ($_GET['msg']) {
 case 'deleted':
-$message = '<div class="success-msg">✅ Пользователь успешно удален</div>';
+$message = '<div class="success-msg">✩ Пользователь успешно удален</div>';
 break;
 case 'updated':
-$message = '<div class="success-msg">✅ Данные пользователя успешно обновлены</div>';
+$message = '<div class="success-msg">✩ Данные пользователя успешно обновлены</div>';
 break;
 }
 }
@@ -275,7 +275,7 @@ $totalUsers = count($users);
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f5f5;
+            background-color: #C2C5CE;
             padding: 20px;
         }
 
@@ -286,7 +286,7 @@ $totalUsers = count($users);
 
         /* Header */
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #566777;
             color: white;
             padding: 20px;
             border-radius: 10px;
@@ -332,8 +332,8 @@ $totalUsers = count($users);
         .stats-title {
             font-size: 1.5rem;
             margin-bottom: 15px;
-            color: #333;
-            border-left: 4px solid #667eea;
+            color: #566777;
+            border-left: 4px solid #566777;
             padding-left: 15px;
         }
 
@@ -345,7 +345,7 @@ $totalUsers = count($users);
         }
 
         .stat-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #566777;
             color: white;
             padding: 20px;
             border-radius: 10px;
@@ -379,7 +379,7 @@ $totalUsers = count($users);
         }
 
         .lang-stat-count {
-            background: #667eea;
+            background: #566777;
             color: white;
             padding: 2px 8px;
             border-radius: 20px;
@@ -429,7 +429,7 @@ $totalUsers = count($users);
         .users-table th {
             background: #f8f9fa;
             font-weight: 600;
-            color: #333;
+            color: #566777;
         }
 
         .users-table tr:hover {
@@ -470,12 +470,16 @@ $totalUsers = count($users);
         }
 
         .btn-cancel {
-            background: #6c757d;
+            background: #475361;
             color: white;
             padding: 8px 20px;
             text-decoration: none;
             border-radius: 5px;
             display: inline-block;
+        }
+
+        .btn-cancel:hover {
+            background: #566777;
         }
 
         /* Modal for Edit */
@@ -511,11 +515,11 @@ $totalUsers = count($users);
             align-items: center;
             margin-bottom: 20px;
             padding-bottom: 10px;
-            border-bottom: 2px solid #eee;
+            border-bottom: 2px solid #C2C5CE;
         }
 
         .modal-header h2 {
-            color: #333;
+            color: #566777;
         }
 
         .close-modal {
@@ -523,11 +527,11 @@ $totalUsers = count($users);
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
-            color: #999;
+            color: #566777;
         }
 
         .close-modal:hover {
-            color: #333;
+            color: #475361;
         }
 
         .form-group {
@@ -538,7 +542,7 @@ $totalUsers = count($users);
             display: block;
             margin-bottom: 5px;
             font-weight: 600;
-            color: #333;
+            color: #566777;
         }
 
         .form-group input,
@@ -546,9 +550,16 @@ $totalUsers = count($users);
         .form-group select {
             width: 100%;
             padding: 8px 12px;
-            border: 1px solid #ddd;
+            border: 1px solid #C2C5CE;
             border-radius: 5px;
             font-size: 0.9rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #566777;
+            outline: none;
         }
 
         .form-group textarea {
@@ -581,20 +592,21 @@ $totalUsers = count($users);
             gap: 10px;
             margin-top: 20px;
             padding-top: 15px;
-            border-top: 1px solid #eee;
+            border-top: 1px solid #C2C5CE;
         }
 
         .btn-save {
-            background: #28a745;
+            background: #566777;
             color: white;
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
 
         .btn-save:hover {
-            background: #218838;
+            background: #475361;
         }
 
         select[multiple] {
@@ -602,7 +614,8 @@ $totalUsers = count($users);
         }
 
         .badge {
-            background: #e9ecef;
+            background: #C2C5CE;
+            color: #566777;
             padding: 2px 8px;
             border-radius: 12px;
             font-size: 0.75rem;
@@ -639,7 +652,7 @@ $totalUsers = count($users);
         <h1> Административная панель</h1>
         <div class="admin-info">
             Вы вошли как <strong>admin</strong>
-            <a href="admin.php?logout" class="logout-link" onclick="return confirm('Выйти из панели администратора?')">🚪 Выйти</a>
+            <a href="admin.php?logout" class="logout-link" onclick="return confirm('Выйти из панели администратора?')">✩ Выйти</a>
         </div>
     </div>
 
@@ -660,7 +673,7 @@ $totalUsers = count($users);
         </div>
     </div>
 
-    <h3 style="margin: 20px 0 10px 0;"> Популярность языков программирования</h3>
+    <h3 style="margin: 20px 0 10px 0; color: #566777;"> Популярность языков программирования</h3>
     <div class="lang-stats">
         <?php foreach ($languageStats as $lang): ?>
         <div class="lang-stat-item">
@@ -675,7 +688,7 @@ $totalUsers = count($users);
 <div class="users-section">
     <h2 class="stats-title"> Все пользователи</h2>
     <?php if (empty($users)): ?>
-    <p style="text-align: center; padding: 40px; color: #999;">Нет зарегистрированных пользователей</p>
+    <p style="text-align: center; padding: 40px; color: #566777;">Нет зарегистрированных пользователей</p>
     <?php else: ?>
     <table class="users-table">
         <thead>
@@ -713,10 +726,10 @@ $totalUsers = count($users);
             </td>
             <td>
                 <div class="action-buttons">
-                    <a href="admin.php?action=edit&id=<?php echo $user['id']; ?>" class="btn-edit"> Редакт.</a>
+                    <a href="admin.php?action=edit&id=<?php echo $user['id']; ?>" class="btn-edit">✿ Редакт.</a>
                     <a href="admin.php?action=delete&id=<?php echo $user['id']; ?>"
                        class="btn-delete"
-                       onclick="return confirm('Удалить пользователя <?php echo htmlspecialchars($user['fio']); ?>?')">🗑️ Удалить</a>
+                       onclick="return confirm('Удалить пользователя <?php echo htmlspecialchars($user['fio']); ?>?')">✿ Удалить</a>
                 </div>
             </td>
         </tr>
@@ -778,7 +791,7 @@ $totalUsers = count($users);
                     </option>
                     <?php endforeach; ?>
                 </select>
-                <small>Для выбора нескольких: Ctrl + клик</small>
+                <small style="color: #566777;">Для выбора нескольких: Ctrl + клик</small>
             </div>
 
             <div class="form-group">
