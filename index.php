@@ -10,8 +10,6 @@ header('Content-Type: text/html; charset=UTF-8');
 // Подключение к БД (DRY - используем общий конфиг)
 require_once 'db_config.php';
 
-
-
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $messages = array();
     
@@ -344,8 +342,7 @@ else {
             
             $app_id = $db->lastInsertId();
             
-            // Сохраняем логин и хеш пароля (нужно добавить поле в таблицу!)
-            // Предполагается, что в таблице application есть поля login и pass_hash
+            // Сохраняем логин и хеш пароля
             $updateStmt = $db->prepare("UPDATE application SET login = ?, pass_hash = ? WHERE id = ?");
             $updateStmt->execute([$login, $passHash, $app_id]);
             
