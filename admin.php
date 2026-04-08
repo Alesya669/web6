@@ -10,34 +10,49 @@ header('Content-Type: text/html; charset=UTF-8');
 // Подключение к БД
 require_once 'db_config.php';
 
-// HTTP-авторизация администратора
-$admin_login = 'admin';
-$admin_password_hash = md5('admin123'); // Пароль: admin123
+// HTTP-авторизация администратора с проверкой из таблицы admins
+$auth_success = false;
 
-if (empty($_SERVER['PHP_AUTH_USER']) ||
-    empty($_SERVER['PHP_AUTH_PW']) ||
-    $_SERVER['PHP_AUTH_USER'] != $admin_login ||
-    md5($_SERVER['PHP_AUTH_PW']) != $admin_password_hash) {
+if (!empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW'])) {
+    try {
+        $stmt = $db->prepare("SELECT * FROM admins WHERE login = ? AND pass_hash = MD5(?)");
+        $stmt->execute([$_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']]);
+        if ($stmt->fetch()) {
+            $auth_success = true;
+        }
+    } catch (PDOException $e) {
+        // Таблица admins, возможно, ещё не создана
+        $auth_success = false;
+    }
+}
 
+if (!$auth_success) {
     header('HTTP/1.1 401 Unauthorized');
     header('WWW-Authenticate: Basic realm="Admin Panel"');
     echo '<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>401 Требуется авторизация</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
-        h1 { color: #721c24; }
-    </style>
-</head>
-<body>
-<h1>401 Требуется авторизация</h1>
-<p>Для доступа к административной панели необходимо ввести логин и пароль.</p>
-</body>
-</html>';
-exit();
+    <html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>401 Требуется авторизация</title>
+        <link rel="stylesheet" href="style.css">
+        <style>
+            .container { max-width: 500px; margin: 100px auto; text-align: center; }
+            h1 { color: #721c24; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>401 Требуется авторизация</h1>
+            <p>Для доступа к административной панели необходимо ввести логин и пароль.</p>
+            <p><strong>Логин:</strong> admin<br><strong>Пароль:</strong> admin123</p>
+            <p><a href="index.php">← Вернуться на главную</a></p>
+        </div>
+    </body>
+    </html>';
+    exit();
 }
+
+
 
 // Обработка действий администратора
 $action = $_GET['action'] ?? '';
