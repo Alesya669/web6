@@ -652,7 +652,7 @@ $totalUsers = count($users);
         <h1> Административная панель</h1>
         <div class="admin-info">
             Вы вошли как <strong>admin</strong>
-            <a href="admin.php?logout" class="logout-link" onclick="return confirm('Выйти из панели администратора?')">✩ Выйти</a>
+            
         </div>
     </div>
 
